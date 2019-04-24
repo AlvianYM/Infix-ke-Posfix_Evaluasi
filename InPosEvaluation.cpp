@@ -122,3 +122,72 @@ class List
 		}
 
 };
+
+
+int main()
+{
+	MyStack stack;
+	List infix,postfix;
+	char in[5];
+	int i=0;
+	while(in[i]!=10)
+	{
+		
+		for(int j=0; j<5; j++)
+			in[j]='\0';
+		i=0;
+		while(in[i-1]!=32 && in[i-1]!=10)
+		{
+			cin.get(in[i]);
+			i++;
+		}
+		infix.TB(JadiInt(in));
+		i--;
+	}
+	cout<<"Infix: ";
+	infix.tampil();
+	cout<<endl;
+
+	while(infix.head!=NULL)
+	{	
+		if(infix.depan()=='*' || infix.depan()=='/' || infix.depan()=='+' || infix.depan()=='-')
+		{
+			if(stack.kosong() || stack.atas()=='(')
+			{
+				stack.push(infix.pop());
+			}
+			else
+			{
+				while(!stack.kosong() && stack.atas()!='(' && tingkat(infix.depan()) <= tingkat(stack.atas()))
+				{
+					postfix.TB(stack.pop());
+				}
+				stack.push(infix.pop());
+			}
+		}
+		else if(infix.depan()=='(')
+		{
+			stack.push(infix.pop());
+		}
+		else if(infix.depan()==')')
+		{
+			while(!stack.kosong() && stack.atas()!='(')
+			{
+				postfix.TB(stack.pop());
+			}
+			infix.pop();
+			stack.pop();
+		}
+		else
+		{
+			postfix.TB(infix.pop());
+		}
+	}
+	while(!stack.kosong())
+	{
+		postfix.TB(stack.pop());
+	}
+	cout<<"Postfix: ";
+	postfix.tampil();
+	cout<<endl;
+}
