@@ -123,6 +123,8 @@ class List
 
 };
 
+int JadiInt(char a[5]);
+int tingkat(int a);
 
 int main()
 {
@@ -190,4 +192,62 @@ int main()
 	cout<<"Postfix: ";
 	postfix.tampil();
 	cout<<endl;
+	
+	int A,B,C;
+	while(postfix.head!=NULL)
+	{
+		if(postfix.depan()=='*' || postfix.depan()=='/' || postfix.depan()=='+' || postfix.depan()=='-')
+		{
+			switch(postfix.pop())
+			{
+				case '*':
+					A=stack.pop();
+					B=stack.pop();
+					C=B*A;
+					stack.push(C);
+					break;
+				case '/':
+					A=stack.pop();
+					B=stack.pop();
+					C=B/A;
+					stack.push(C);
+					break;
+				case '-':
+					A=stack.pop();
+					B=stack.pop();
+					C=B-A;
+					stack.push(C);
+					break;
+				case '+':
+					A=stack.pop();
+					B=stack.pop();
+					C=B+A;
+					stack.push(C);
+					break;
+			}
+		}
+		else
+		{
+			stack.push(postfix.pop());
+		}
+		
+	}
+	cout<<"Hasil= "<<stack.pop();
+	return 0;
+}
+
+int JadiInt(char a[5])
+{
+	if(a[0]=='*' || a[0]=='/' || a[0]=='+' || a[0]=='-' || a[0]=='(' || a[0]==')')
+		return a[0];
+	else
+		return atoi(a);
+}
+
+int tingkat(int a)
+{
+	if (a=='*' || a=='/')
+		return 2;
+	else
+		return 1;
 }
