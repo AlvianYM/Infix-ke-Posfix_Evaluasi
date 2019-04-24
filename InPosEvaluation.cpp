@@ -132,6 +132,10 @@ int main()
 	List infix,postfix;
 	char in[5];
 	int i=0;
+	
+	cout<<"Gunakan Spasi Dalam Menginput! contoh : ( 3 * 4 ) + 2\n\n";
+	cout<<"Input\n>>";
+	
 	while(in[i]!=10)
 	{
 		
