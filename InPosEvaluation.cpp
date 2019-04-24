@@ -70,3 +70,55 @@ class MyStack
 		}
 
 };
+
+class List
+{
+	public:
+		Node *head=NULL;
+		Node *last=NULL;
+
+		void TB(int a)
+		{
+			Node *baru=new Node;
+			baru->val=a;
+			baru->next=NULL;
+			if(head==NULL)
+			{
+				head=baru;
+				last=baru;
+			}
+			else
+			{
+				last->next=baru;
+				last=baru;
+			}
+		}
+
+		int pop()
+		{
+			int a=head->val;
+			Node *tmp=head->next;
+			delete head;
+			head=tmp;
+			return a;
+		}
+
+		int depan()
+		{
+			return head->val;
+		}
+
+		void tampil()
+		{
+			Node *bantu=head;
+			while(bantu!=NULL)
+			{
+				if(bantu->val=='*' || bantu->val=='/' || bantu->val=='+' || bantu->val=='-' || bantu->val=='(' || bantu->val==')')
+					cout<<(char)bantu->val<<" ";
+				else
+					cout<<bantu->val<<" ";
+				bantu=bantu->next;
+			}
+		}
+
+};
